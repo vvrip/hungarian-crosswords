@@ -437,11 +437,11 @@ io.sockets.on('connection', function (socket) {
                                         console.log("Get score_losts err : user = " + __looser + ', error = ' + error);
                                         return;
                                     }
-                                    __currUserLosts = parseInt(result['score_losts']);
-                                    __currUserLosts++;
+                                    Sockets[i].session.userLosts = parseInt(result['score_losts']);
+                                    Sockets[i].session.userLosts++;
                                     console.log("Get score_losts : user = " + __looser + '.');
                                 });
-                            __connection.query('update users set score_losts = ' + __currUserLosts +
+                            __connection.query('update users set score_losts = ' + Sockets[i].session.userLosts +
                                 ' where name = \'' + __looser + '\';',
                                 function(error, result, fields){
                                     // Если возникла ошибка выбрасываем исключение
@@ -482,19 +482,20 @@ io.sockets.on('connection', function (socket) {
                                         console.log("Get score_wins err : user = " + __winner + ', error = ' + error);
                                         return;
                                     }
-                                    __currUserWins = parseInt(result['score_wins']);
-                                    __currUserWins++;
+                                    Sockets[i].session.userWins = parseInt(result['score_wins']);
+                                    Sockets[i].session.userWins++;
                                     console.log("Get score_wins : user = " + __winner + '.');
-                                    __connection.query('update users set score_wins = ' + __currUserWins +
-                                        ' where name = \'' + __winner + '\';',
-                                        function(error, result, fields){
-                                            // Если возникла ошибка выбрасываем исключение
-                                            if (error){
-                                                console.log("Save score_wins err : user = " + __winner + ', error = ' + error);
-                                                return;
-                                            }
-                                            console.log("Save score_wins : user = " + __winner + '.');
-                                        });
+                                });
+
+                            __connection.query('update users set score_wins = ' + Sockets[i].session.userWins +
+                                ' where name = \'' + __winner + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Save score_wins err : user = " + __winner + ', error = ' + error);
+                                        return;
+                                    }
+                                    console.log("Save score_wins : user = " + __winner + '.');
                                 });
 
                             __connection.query('Select score_losts from users where name = \'' + __looser + '\';',
@@ -504,11 +505,11 @@ io.sockets.on('connection', function (socket) {
                                         console.log("Get score_losts err : user = " + __looser + ', error = ' + error);
                                         return;
                                     }
-                                    __currUserLosts = parseInt(result['score_losts']);
-                                    __currUserLosts++;
+                                    socket.session.userLosts = parseInt(result['score_losts']);
+                                    socket.session.userLosts++;
                                     console.log("Get score_losts : user = " + __looser + '.');
                                 });
-                            __connection.query('update users set score_losts = ' + __currUserLosts +
+                            __connection.query('update users set score_losts = ' + socket.session.userLosts +
                                 ' where name = \'' + __looser + '\';',
                                 function(error, result, fields){
                                     // Если возникла ошибка выбрасываем исключение
@@ -517,9 +518,9 @@ io.sockets.on('connection', function (socket) {
                                         return;
                                     }
                                     console.log("Save score_losts : user = " + __looser + '.');
-                                    // Завершаем соединение
-                                    __connection.end();
                                 });
+                            // Завершаем соединение
+                            __connection.end();
                         }//end if
                     }//end for
                 }//end else
