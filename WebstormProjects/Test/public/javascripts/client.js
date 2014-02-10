@@ -12,6 +12,7 @@ var arr_words;
 var count_words;
 var cells = Array();
 var word = new String();
+var crossOutedWords;
 
 function getOrWaitRival(){
     //var socket = io.connect('http://localhost:88');
@@ -44,6 +45,9 @@ function getUserDataAndGoToGame()
         document.getElementById('username').innerHTML = my_name;
         document.getElementById('rivalname').innerHTML = my_rival;
     });
+    socket.on('redirectToMain', function(data){
+        document.location.href = "/main"
+    });
     var table = $('#cross-table').empty();
 
     var table_words= $('#words-table').empty();
@@ -55,6 +59,7 @@ function getUserDataAndGoToGame()
         var crossword = cross.crossword;
         count_words  = cross.count_words;
         words = cross.words;
+        crossOutedWords = 0;
 
         arr_words = words.split(" ");
         for(var i = 1; i < count_words-1; i++) {
@@ -118,31 +123,91 @@ function getUserDataAndGoToGame()
 
                         if (isWordInArrWords())
                         {
+                            //меняем счет
+                            var score = parseInt(document.getElementById('userscore').innerHTML);
+                            score++;
+                            document.getElementById('userscore').innerHTML = score;
                             //отправка на сервер слова и координат
                             socket.emit('wordIsFindMe', { word: word, cells: cells});
+                            crossOutedWords++;
+
                             setStyleWord();
                             wordFind();
+                            if(checkEndGame()){
+                                var score1 = parseInt(document.getElementById('userscore').innerHTML);
+                                var score2 = parseInt(document.getElementById('rivalscore').innerHTML);
+                                if(score1 > score2){
+                                    socket.emit('GameWasEnded',
+                                        {
+                                            username : document.getElementById('username').innerHTML,
+                                            score : parseInt(document.getElementById('userscore').innerHTML)
+                                        });
+                                }else if(score1 == score2)/*{
+                                        socket.emit('GameWasEnded',
+                                            {
+                                                username : document.getElementById('rivalname').innerHTML,
+                                                score : parseInt(document.getElementById('rivalscore').innerHTML)
+                                            });
+                                        }else*/{
+                                            socket.emit('GameWasEnded',
+                                                {
+                                                    username : document.getElementById('rivalname').innerHTML,
+                                                    score : 0
+                                                });
+                                        }
+                            }
                         }
                 }));
             }
             table.append(tr);
         }
+
+        socket.on('you_win', function(){
+            alert('Congratulations! You win!');
+            document.location.href = "/main";
+        });
+
+        socket.on('you_lose', function(){
+            alert('You lose.');
+            document.location.href = "/main";
+        });
+
         socket.on('wordIsFindOther', function(data){
             var cs = data['cells'];
             var wd = data['word'];
-            alert("Selected word ");
+            crossOutedWords++;
+            var usl = false;
             for (var i=0; i<count_words/4; i++){
                 for (var j=0; j<4; j++){
-                    if ($("#words-table tr:eq("+i+") td:eq("+j+")").html() == wd)
-                        $("#words-table tr:eq("+i+") td:eq("+j+")").addClass("wordfind");
+                    if (($("#words-table tr:eq("+i+") td:eq("+j+")").html() == wd) &&
+                        $("#words-table tr:eq("+i+") td:eq("+j+")").hasClass("wordfind"))
+                    {
+                        usl = true;
+                        break;
+                    }
                 }
             }
+            if (!usl){
+                for (var i=0; i<count_words/4; i++){
+                    for (var j=0; j<4; j++){
+                        if ($("#words-table tr:eq("+i+") td:eq("+j+")").html() == wd)
+                            $("#words-table tr:eq("+i+") td:eq("+j+")").addClass("wordfind");
+                    }
+                }
 
-            for (var k=0; k<cs.length; k++){
-                var j = parseInt(cs[k].j);
-                var i = parseInt(cs[k].i);
-                $("#cross-table tr:eq("+i+") td:eq("+j+")").removeClass("cellselect");
-                $("#cross-table tr:eq("+i+") td:eq("+j+")").addClass("cellfind");
+                for (var k=0; k<cs.length; k++){
+                    var j = parseInt(cs[k].j);
+                    var i = parseInt(cs[k].i);
+                    $("#cross-table tr:eq("+i+") td:eq("+j+")").removeClass("cellselect");
+                    $("#cross-table tr:eq("+i+") td:eq("+j+")").addClass("cellfind");
+                }
+
+                var score = parseInt(document.getElementById('rivalscore').innerHTML);
+                score++;
+                document.getElementById('rivalscore').innerHTML = score;
+            }
+            if(checkEndGame()){
+                socket.emit('GameWasEnded', { score : -1 });
             }
         });
     });
@@ -186,8 +251,15 @@ function wordFind(){
         $("#cross-table tr:eq("+i+") td:eq("+j+")").removeClass("cellselect");
         $("#cross-table tr:eq("+i+") td:eq("+j+")").addClass("cellfind");
     }
-    cells  = new Array();
-    word= new String();
+    cells = new Array();
+    word = new String();
+}
+
+function checkEndGame(){
+    if(arr_words.length == crossOutedWords + 1){
+         return true;
+    }
+    return false;
 }
 
 function resetSelect(){
@@ -197,14 +269,12 @@ function resetSelect(){
         $("#cross-table tr:eq("+i+") td:eq("+j+")").removeClass("cellselect");
     }
     cells  = new Array();
-    word= new String();
+    word = new String();
 }
 
 
 function exit(){
-    //var socket = io.connect('http://localhost');
-    socket.emit('exit');
-    document.location.href = "http://localhost:88"
+    document.location.href = "http://localhost:88/exit"
 }
 
 function authorization()

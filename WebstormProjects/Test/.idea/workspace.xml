@@ -4,9 +4,9 @@
     <list default="true" id="9779f29c-111f-4860-9829-10491a6776c8" name="Default" comment="" />
     <ignored path="Test.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/main.html" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1386623803152" ignored="false" />
-    <file path="/app.js" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1386665833354" ignored="false" />
-    <file path="/client.js" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1386665030457" ignored="false" />
+    <file path="/main.html" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1387269654323" ignored="false" />
+    <file path="/app.js" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1392057336338" ignored="false" />
+    <file path="/client.js" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1387256407223" ignored="false" />
     <file path="/INDEX.HTML" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1385118900799" ignored="false" />
     <file path="/game.html" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1386663274390" ignored="false" />
     <file path="/style.css" changelist="9779f29c-111f-4860-9829-10491a6776c8" time="1385125416440" ignored="false" />
@@ -32,11 +32,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="325" column="44" selection-start="11494" selection-end="11494" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="454" column="47" selection-start="17999" selection-end="17999" vertical-scroll-proportion="3.8883495">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,10 +46,8 @@
       <file leaf-file-name="wait_second_player.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wait_second_player.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="17" selection-start="1920" selection-end="1962" vertical-scroll-proportion="6.5384617">
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state line="29" column="17" selection-start="1920" selection-end="1962" vertical-scroll-proportion="54.346153">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -55,25 +55,16 @@
       <file leaf-file-name="mystyle.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/mystyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="0" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.0">
+            <state line="81" column="0" selection-start="1675" selection-end="1675" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="191" column="1" selection-start="3941" selection-end="3941" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="game.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="game.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="39" selection-start="1942" selection-end="1942" vertical-scroll-proportion="0.36394557">
+            <state line="47" column="47" selection-start="2609" selection-end="2609" vertical-scroll-proportion="-0.65384614">
               <folding />
             </state>
           </provider>
@@ -82,7 +73,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="46" selection-start="2498" selection-end="2498" vertical-scroll-proportion="-2.4615386">
+            <state line="68" column="46" selection-start="2498" selection-end="2498" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -91,7 +82,7 @@
       <file leaf-file-name="main.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="55" selection-start="3132" selection-end="3132" vertical-scroll-proportion="-22.23077">
+            <state line="70" column="55" selection-start="3667" selection-end="3667" vertical-scroll-proportion="-0.65384614">
               <folding />
             </state>
           </provider>
@@ -100,7 +91,7 @@
       <file leaf-file-name="client.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="32" selection-start="4712" selection-end="4712" vertical-scroll-proportion="0.0">
+            <state line="33" column="19" selection-start="829" selection-end="829" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -120,11 +111,11 @@
         <option value="$PROJECT_DIR$/cross_1.txt" />
         <option value="$PROJECT_DIR$/cross_1.json" />
         <option value="$PROJECT_DIR$/INDEX.HTML" />
-        <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/mystyle.css" />
-        <option value="$PROJECT_DIR$/main.html" />
         <option value="$PROJECT_DIR$/wait_second_player.html" />
         <option value="$PROJECT_DIR$/game.html" />
+        <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
+        <option value="$PROJECT_DIR$/main.html" />
         <option value="$PROJECT_DIR$/public/javascripts/client.js" />
         <option value="$PROJECT_DIR$/app.js" />
       </list>
@@ -177,6 +168,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -233,7 +238,7 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView" selected-index="2">
+  <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
       <are-packages-shown value="false" />
       <are-modules-shown value="false" />
@@ -258,13 +263,13 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944155" sideWeight="0.6064189" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19880864" sideWeight="0.6097973" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.6111111" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3935811" sideWeight="0.9683996" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32851985" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24893798" sideWeight="0.99638987" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17349218" sideWeight="0.7398649" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39891696" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880205" sideWeight="0.99638987" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32851985" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26013514" sideWeight="0.9683996" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -334,28 +339,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="13" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/images/cross_1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/vendor/booklet/jquery.booklet.1.1.0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="22" selection-start="1161" selection-end="1161" vertical-scroll-proportion="104.6" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cross_1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="284" selection-start="614" selection-end="614" vertical-scroll-proportion="0.22895622" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/bower_components/bootstrap/css.html">
@@ -373,68 +363,83 @@
         <state line="17" column="19" selection-start="299" selection-end="301" vertical-scroll-proportion="-3.379822" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.19-src/core-modules-sources/lib/http.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="46" selection-start="2498" selection-end="2498" vertical-scroll-proportion="-2.4615386">
-          <folding />
-        </state>
+        <state line="691" column="0" selection-start="19880" selection-end="19880" vertical-scroll-proportion="0.6358209" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/socket.io/node_modules/socket.io-client/bin/builder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="4" selection-start="152" selection-end="186" vertical-scroll-proportion="-7.8992934" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="1" selection-start="3941" selection-end="3941" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="109" column="0" selection-start="2409" selection-end="2409" vertical-scroll-proportion="0.5475285" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/stylesheets/mystyle.css">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.19-src/core-modules-sources/lib/http.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="691" column="0" selection-start="19880" selection-end="19880" vertical-scroll-proportion="0.6358209">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="55" selection-start="3132" selection-end="3132" vertical-scroll-proportion="-22.23077">
+        <state line="68" column="46" selection-start="2498" selection-end="2498" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wait_second_player.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="17" selection-start="1920" selection-end="1962" vertical-scroll-proportion="6.5384617">
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="32" selection-start="4712" selection-end="4712" vertical-scroll-proportion="0.0">
+        <state line="29" column="17" selection-start="1920" selection-end="1962" vertical-scroll-proportion="54.346153">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/mystyle.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="325" column="44" selection-start="11494" selection-end="11494" vertical-scroll-proportion="0.0">
+        <state line="81" column="0" selection-start="1675" selection-end="1675" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="39" selection-start="1942" selection-end="1942" vertical-scroll-proportion="0.36394557">
+        <state line="47" column="47" selection-start="2609" selection-end="2609" vertical-scroll-proportion="-0.65384614">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.19-src/core-modules-sources/lib/module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="499" column="0" selection-start="13986" selection-end="13986" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.WebStorm6/system/extLibs/nodejs-v0.10.19-src/core-modules-sources/lib/timers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="0" selection-start="3799" selection-end="3799" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="55" selection-start="3667" selection-end="3667" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/client.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="19" selection-start="829" selection-end="829" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="454" column="47" selection-start="17999" selection-end="17999" vertical-scroll-proportion="3.8883495">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -56,14 +56,22 @@ app.use(express.session({
 }));
 app.use(app.router);
 
+app.get('/exit', function (req, res) {
+    req.session.username = null;
+    res.writeHead(302, { 'Location' : '/' });
+    res.end();
+});
+
 app.get('/', function (req, res) {
-    /*try{
+    try{
         if(req.session.username){
-            res.redirect('/main');
+            res.writeHead(302, { 'Location' : '/main' });
+            res.end();
+            return;
         }
     }catch(err){
         console.log('Err : ' + err);
-    }*/
+    }
     res.sendfile(__dirname + '/index.html');
 });
 
@@ -71,6 +79,11 @@ app.get('/main', function (req, res) {
     console.log('Try read user param');
     try{
         if(!req.session.username){
+            if(!authStore.user){
+                res.writeHead(302, { 'Location' : '/' });
+                res.end();
+                return;
+            }
             req.session.username = authStore.user;
             console.log("User : " + req.session.username);
         }
@@ -79,9 +92,17 @@ app.get('/main', function (req, res) {
         console.log('Err2 : ' + err2);
     }
     res.sendfile(__dirname + '/main.html');
+    authStore.user = null;
 });
 
 app.get('/wait_rival', function (req, res) {
+
+    if(!req.session.username){
+        res.writeHead(302, { 'Location' : '/' });
+        res.end();
+        return;
+    }
+
     if(req.session.username){
         sessionStore.user = req.session.username;
         console.log("User wait rival : " + req.session.username);
@@ -96,6 +117,13 @@ app.get('/wait_rival', function (req, res) {
 });
 
 app.get('/game', function (req, res) {
+
+    if(!req.session.username){
+        res.writeHead(302, { 'Location' : '/' });
+        res.end();
+        return;
+    }
+
     if(req.session.username){
         sessionStore.user = req.session.username;
         console.log("User in game : " + req.session.username);
@@ -236,6 +264,10 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('getCrossword', function () {
         Sockets.push(socket);
+        if(!sessionStore.user1){
+            socket.emit('redirectToMain');
+            return;
+        }
         if(!socket.session.username){
             socket.session.username = sessionStore.user;
             console.log('Socket user in game : ' + socket.session.username);
@@ -246,14 +278,33 @@ io.sockets.on('connection', function (socket) {
             if(sessionStore.user1 == socket.session.username){
                 socket.session.userrival = sessionStore.user2;
                 socket.emit('yourrival', {username : socket.session.username, rival : sessionStore.user2});
+                if(sessionStore.verifyGame){
+                    if(sessionStore.verifyGame == 1){
+                        sessionStore.verifyGame = 2;
+                    }else if(sessionStore.verifyGame == 2){
+                        sessionStore.verifyGame = undefined;
+                        sessionStore.user1 = undefined;
+                        sessionStore.user2 = undefined;
+                    }
+                }
             }
             if(sessionStore.user2 == socket.session.username){
                 socket.session.userrival = sessionStore.user1;
                 socket.emit('yourrival', {username : socket.session.username, rival : sessionStore.user1});
+                if(sessionStore.verifyGame){
+                    if(sessionStore.verifyGame == 1){
+                        sessionStore.verifyGame = 2;
+                    }else if(sessionStore.verifyGame == 2){
+                        sessionStore.verifyGame = undefined;
+                        sessionStore.user1 = undefined;
+                        sessionStore.user2 = undefined;
+                    }
+                }
             }
         }
         var fs = require("fs");
-        fs.readFile(__dirname+'/cross_1.json', function (err, data){
+
+        fs.readFile(__dirname+'/public/Crosswords/Home/cross_'+sessionStore.crossNum.toString()+'.json', function (err, data){
             if(err){
                 console.log(err);
                 return;
@@ -261,11 +312,6 @@ io.sockets.on('connection', function (socket) {
             var cross = JSON.parse(data);
             socket.emit('crossword', {cross: cross});
         });
-    });
-
-    socket.on('exit', function() {
-        sessionStore.user = '';
-        /*сделать людской выход*/
     });
 
     socket.on('getRival', function(data){
@@ -295,13 +341,15 @@ io.sockets.on('connection', function (socket) {
                             }
                             console.log('Waiter : ' + sessionStore.user1);
                             console.log('Rival : ' + sessionStore.user2);
+                            sessionStore.verifyGame = 1;
+                            sessionStore.crossNum = Math.floor((Math.random() * 2) + 1);
                             SocketsWaiters[i].emit('rival');
                             console.log('Sending rivals ...');
                             setTimeout(
                                 function(){
                                     socket.emit('rival');
                                     console.log('Rivals sended!');
-                                }, 1500);
+                                }, 3000);
                             SocketsWaiters.pop();
                             break;
                         }
@@ -318,9 +366,165 @@ io.sockets.on('connection', function (socket) {
         for(var i = 0; i<Sockets.length; i++){
             if(Sockets[i].session.username == socket.session.userrival){
                 console.log('Sending word from ' + socket.session.username + ' to ' + Sockets[i].session.username);
-                //socket.emit('wordIsFindOther');
                 Sockets[i].emit('wordIsFindOther', {cells : cells, word : word});
             }
         }
+    });
+
+    socket.on('GameWasEnded', function(data){
+        console.log('GameEnded!');
+        score = data['score'];
+        //ничья
+        if(score == 0){
+            for(var i = 0; i<Sockets.length; i++){
+                if(Sockets[i].session.username == socket.session.userrival){
+                    console.log('Sending end game from ' + socket.session.username + ' to ' + Sockets[i].session.username);
+                    Sockets[i].emit('endGame');
+                    socket.emit('endGame');
+                }
+            }
+        }
+        else
+        {
+            //кто-то победил
+            //if(score > 0){
+                winnerName = data['username'];
+                if(winnerName == socket.session.username){
+                    socket.session.userWins = 0;
+                    socket.emit('you_win');
+                    console.log('Win ' + socket.session.username);
+                    for(var i = 0; i<Sockets.length; i++){
+                        if(Sockets[i].session.username == socket.session.userrival){
+                            console.log('Lose ' + Sockets[i].session.username);
+                            Sockets[i].emit('you_lose');
+                            __winner = socket.session.username;
+                            __looser = Sockets[i].session.username;
+                            __connection = mysql.createConnection({
+                                host: 'localhost',
+                                port: 3306,
+                                user: 'root',
+                                password: ''
+                            });
+                            __connection.connect();
+                            console.log('Connected successfully!');
+                            __connection.query('use node');
+                            __connection.query('Select score_wins from users where name = \'' + __winner + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Get score_wins err : user = " + __winner + ', error = ' + error);
+                                        return;
+                                    }
+                                    socket.session.userWins = parseInt(result['score_wins']);
+                                    socket.session.userWins++;
+                                    console.log("Get score_wins : user = " + __winner + '.');
+                                });
+                            __connection.query('update users set score_wins = ' + socket.session.userWins +
+                                ' where name = \'' + __winner + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Save score_wins err : user = " + __winner + ', error = ' + error);
+                                        return;
+                                    }
+                                    console.log("Save score_wins : user = " + __winner + '.');
+                                });
+
+                            __connection.query('Select score_losts from users where name = \'' + __looser + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Get score_losts err : user = " + __looser + ', error = ' + error);
+                                        return;
+                                    }
+                                    __currUserLosts = parseInt(result['score_losts']);
+                                    __currUserLosts++;
+                                    console.log("Get score_losts : user = " + __looser + '.');
+                                });
+                            __connection.query('update users set score_losts = ' + __currUserLosts +
+                                ' where name = \'' + __looser + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Save score_losts err : user = " + __looser + ', error = ' + error);
+                                        return;
+                                    }
+                                    console.log("Save score_losts : user = " + __looser + '.');
+                                });
+                            // Завершаем соединение
+                            __connection.end();
+                        }//end if
+                        break;
+                    }//end for
+                }else{
+                    socket.emit('you_lose');
+                    console.log('Lose ' + socket.session.userrival);
+                    for(var i = 0; i<Sockets.length; i++){
+                        if(Sockets[i].session.username == socket.session.userrival){
+                            console.log('Win ' + Sockets[i].session.username);
+                            Sockets[i].emit('you_win');
+                            __looser = socket.session.username;
+                            __winner = Sockets[i].session.username;
+                            __connection = mysql.createConnection({
+                                host: 'localhost',
+                                port: 3306,
+                                user: 'root',
+                                password: ''
+                            });
+                            __connection.connect();
+                            console.log('Connected successfully!');
+                            __connection.query('use node');
+
+                            __connection.query('Select score_wins from users where name = \'' + __winner + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Get score_wins err : user = " + __winner + ', error = ' + error);
+                                        return;
+                                    }
+                                    __currUserWins = parseInt(result['score_wins']);
+                                    __currUserWins++;
+                                    console.log("Get score_wins : user = " + __winner + '.');
+                                    __connection.query('update users set score_wins = ' + __currUserWins +
+                                        ' where name = \'' + __winner + '\';',
+                                        function(error, result, fields){
+                                            // Если возникла ошибка выбрасываем исключение
+                                            if (error){
+                                                console.log("Save score_wins err : user = " + __winner + ', error = ' + error);
+                                                return;
+                                            }
+                                            console.log("Save score_wins : user = " + __winner + '.');
+                                        });
+                                });
+
+                            __connection.query('Select score_losts from users where name = \'' + __looser + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Get score_losts err : user = " + __looser + ', error = ' + error);
+                                        return;
+                                    }
+                                    __currUserLosts = parseInt(result['score_losts']);
+                                    __currUserLosts++;
+                                    console.log("Get score_losts : user = " + __looser + '.');
+                                });
+                            __connection.query('update users set score_losts = ' + __currUserLosts +
+                                ' where name = \'' + __looser + '\';',
+                                function(error, result, fields){
+                                    // Если возникла ошибка выбрасываем исключение
+                                    if (error){
+                                        console.log("Save score_losts err : user = " + __looser + ', error = ' + error);
+                                        return;
+                                    }
+                                    console.log("Save score_losts : user = " + __looser + '.');
+                                    // Завершаем соединение
+                                    __connection.end();
+                                });
+                        }//end if
+                    }//end for
+                }//end else
+            //}//end if
+        }//end else
+        console.log('Game was ended!');
     });
 });

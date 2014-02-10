@@ -71,3 +71,26 @@ TABLE.table2 {
     color: red;
 }
 
+TABLE.table3 {
+    margin-left:30px;
+    align:center;
+    padding: 200px;
+    font-weight: bolder;
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}
+
+.table3 TD, TH {
+    text-align: center;
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    padding: 5px; /* Поля вокруг текста */
+}
+
+.table3 TD.cellTHBlue{
+    color: darkblue; /* Цвет текста */
+}
+
+.table3 TD.cellTHGreen{
+    color: green; /* Цвет текста */
+}
+
+

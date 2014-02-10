@@ -95,21 +95,19 @@ span.reference a:hover{
 }
 .book_wrapper a.article,
 .book_wrapper a.demo{
-	background:transparent url(../images/circle.png) no-repeat 50% 0px;
-	display:block;
-	width:95px;
-	height:41px;
-	text-decoration:none;
-	outline:none;
-	font-size:16px;
-	color:#555;
-	float:left;
-	line-height:41px;
-	padding-left:47px;
+    background:transparent url(../images/circle.png) no-repeat 50% 0px;
+    display:block;
+    width:95px;
+    height:41px;
+    text-decoration:none;
+    outline:none;
+    font-size:16px;
+    color:#555;
+    float:right;
+    line-height:41px;
+    padding-left:47px;
 }
-.book_wrapper a.demo{
-	margin-left:50px;
-}
+
 .book_wrapper a.article:hover,
 .book_wrapper a.demo:hover{
 	background-position:50% -41px;
