@@ -1,0 +1,17 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password" : ""
+  },
+  "server": {
+    "host": "localhost",
+    "port": 88
+  },
+  "mail": {
+    "service": "Yandex",
+    "user": "",
+    "password": ""
+  }
+}
